@@ -18,8 +18,9 @@
         <!-- Echo all executed SQL to stdout -->
         <property name="hibernate.show_sql">true</property>
         <!-- Drop and re-create the database schema on startup -->
-        <property name="hibernate.hbm2ddl.auto">update</property>
+<!--        <property name="hibernate.hbm2ddl.auto">update</property>-->
         <!-- Mention annotated entity class -->
+        <mapping class="entities.Classes"/>
         <mapping class="entities.Student"/>
     </session-factory>
 </hibernate-configuration>

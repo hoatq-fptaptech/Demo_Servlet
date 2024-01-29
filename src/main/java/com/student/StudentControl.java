@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,9 +35,12 @@ public class StudentControl extends HttpServlet {
         // Query db
         try (Session session = sessionFactory.openSession()) {
             session.beginTransaction();
-            List<Student> ls = session.createQuery("FROM Student", Student.class).getResultList();
+            List<Student> ls = session.createQuery("SELECT s FROM Student s JOIN FETCH s.classes", Student.class).getResultList();
+//            query.setParameter("cid",1);
+//            List<Student> ls = query.getResultList();
             // Kết thúc giao dịch
             session.getTransaction().commit();
+            System.out.println(ls.get(0).classes.name);
             // end
             req.setAttribute("students",ls);
         }

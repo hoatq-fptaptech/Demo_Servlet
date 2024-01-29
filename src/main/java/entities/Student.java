@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "students")
+@PersistenceContext(name = "Student")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +15,9 @@ public class Student {
     public String telephone;
     @Column(columnDefinition = "TEXT")
     public String address;
-    public int class_id;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "class_id")
+    public Classes classes;
 
     public int getId() {
         return id;
@@ -56,11 +59,4 @@ public class Student {
         this.address = address;
     }
 
-    public int getClass_id() {
-        return class_id;
-    }
-
-    public void setClass_id(int class_id) {
-        this.class_id = class_id;
-    }
 }
